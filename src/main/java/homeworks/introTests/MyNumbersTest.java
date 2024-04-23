@@ -1,3 +1,5 @@
+package homeworks.introTests;
+
 public class MyNumbersTest {
     public int getNumber(int x, int y) {
         int z = 0;

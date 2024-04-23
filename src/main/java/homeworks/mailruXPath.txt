@@ -1,0 +1,42 @@
+1.	«Войти» 
+//* [contains(@class, "resplash-btn resplash-btn_primary resplash-btn_mailbox-big cji-gakb-1jdtl7f")]
+//button[@class="resplash-btn resplash-btn_primary resplash-btn_mailbox-big cji-gakb-1jdtl7f"]
+
+2.	«Создать почту» 
+(//div)[5][starts-with(@class,"footer")]
+//*[contains(@class, "footer cji-gakb-1pn6uk5 footer_logged-out")]
+
+3.	@mail
+//a[starts-with(@class,"ph-logo")]
+//*[contains(@href,"https://trk.mail.ru/c/o4lsx4?mt_sub1=mail.ru")]
+
+4.	«Облако»
+//*[contains(@data-click-counter,"406830646, 61021856")]
+//li[2]/a
+
+5.	«Найти»
+//button[@data-testid="search-button"]
+//button[starts-with(@class,"search-arrow")] 
+
+6.	«Леди»
+(//a)[@class="tabs__item cji-gakb-1n7t1gm"][4]
+//*[@href="//lady.mail.ru/"]
+
+7.	Новость
+(//span)[@class="news-item-link__text cji-gakb-1ifzevr"][2]
+(//li)[@class="news-item-container"][2] 
+
+8.	«Регистрация»
+//a[@class='ph-project ph-project__register svelte-1au561b']
+//div[starts-with(@class, "ph-auth")]/a 
+//a[contains(.,"Регистра")]
+//a[text(),"Регистрация"]
+//a[text()="Регистрация"]
+
+9.	«Войти»
+//button[@class='ph-login svelte-1au561b']
+//div[starts-with(@class, "ph-auth")]/button
+
+10.	Рига (погода)
+//div[starts-with(@class, "weather")]/a
+//a[starts-with(@class,"weather")][2]

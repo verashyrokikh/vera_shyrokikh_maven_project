@@ -1,0 +1,38 @@
+1.	Логотип
+//div[starts-with(@class, "header__logo")]
+//img[@src="/upload/logo.png"]
+2.	Каталог – Импрессо
+(//div)[10]/a[2]
+//a[@href="/products/Impresso/"]
+
+3.	Информация для партнеров
+//a[@href="/partners/"]
+(//div)[8]/ul/li[3]
+
+4.	Поиск
+//i[contains(@class, "search fa search-btn lupa")]
+//i[@class="search fa search-btn lupa"] 
+
+5.	Ru
+//a[@class="header__lang__item header__lang__item_ru active" ]
+//div[@class="header__lang"]/a[1]
+
+6.	Ch
+//div[@class="header__lang"]/a[4]
+//a[@class="header__lang__item header__lang__item_eng" ][3]
+
+7.	Скачать каталог
+//div[@id="select-lang"]/following-sibling::a
+//a[text()="Скачать каталог"]
+
+8.	Слайдер 
+//li[@class="flex-nav-next"]
+//ul[@class="flex-direction-nav"]/li[2]
+
+9.	VK
+(//img)[@src="/bitrix/templates/our_shop/images/VK.svg"][1]
+(//ul)[@class="social_list"][1]/li[3]
+
+10.	Youtube
+(//img)[@src="/bitrix/templates/our_shop/images/youtube.svg"][1]
+(//ul)[@class="social_list"][1]/li[7]

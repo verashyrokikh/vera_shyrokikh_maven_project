@@ -1,3 +1,5 @@
+package homeworks.introTests;
+
 public class UnitTests {
     public static void main(String[] args) {
         MyNumbersTest myNumbersTest = new MyNumbersTest();
