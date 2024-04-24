@@ -3,12 +3,10 @@ package tests.testNG;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.BaseTest;
 import pages.DemoqaSelectPage;
 
 public class DemoqaSelectTestNG {
     DemoqaSelectPage demoqaSelectPage = new DemoqaSelectPage();
-    BaseTest baseTest = new BaseTest();
 
     @BeforeClass
 

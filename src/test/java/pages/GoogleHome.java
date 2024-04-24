@@ -12,8 +12,8 @@ import java.util.List;
 public class GoogleHome {
     WebDriver driver = Driver.getWebDriver();
     private static final String GOOGLE_URL = "https:google.com";
-    private static String textAreaField = "//textarea[@class='gLFyf']";
-    private static String searchListHeader = "//h3";
+    private static final String TEXT_AREA_FIELD_XPATH = "//textarea[@class='gLFyf']";
+    private static final String SEARCH_LIST_HEADER_XPATH = "//h3";
 
     public void openGooglePage() {
         driver.navigate().to(GOOGLE_URL);
@@ -24,7 +24,7 @@ public class GoogleHome {
     }
 
     public void pastWordAndExecuteSearch() {
-        WebElement searchField = driver.findElement(By.xpath(textAreaField));
+        WebElement searchField = driver.findElement(By.xpath(TEXT_AREA_FIELD_XPATH));
 
         Actions past = new Actions(driver);
         past
@@ -37,7 +37,7 @@ public class GoogleHome {
     }
 
     public void checkSearchResults() {
-        List<WebElement> searchResults = driver.findElements(By.xpath(searchListHeader));
+        List<WebElement> searchResults = driver.findElements(By.xpath(SEARCH_LIST_HEADER_XPATH));
         String searchName = "Tutorial";
 
         for (WebElement resultField : searchResults) {

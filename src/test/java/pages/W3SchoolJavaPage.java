@@ -10,19 +10,19 @@ import org.openqa.selenium.interactions.Actions;
 public class W3SchoolJavaPage {
     WebDriver driver = Driver.getWebDriver();
     private static final String W_SCHOOL_URL = "https://www.w3schools.com/java/";
-    private static String wSchoolAcceptConsentsButton = "//div[@id='accept-choices']";
-    private static String copiedWordTutorial = "//div[@id='main']/h1/span[contains(text(), 'Tutorial')]";
+    private static final String W3SCHOOL_ACCEPT_CONCENT_BUTTON_XPATH = "//div[@id='accept-choices']";
+    private static final String WORD_TO_COPY_XPATH = "//div[@id='main']/h1/span[contains(text(), 'Tutorial')]";
 
     public void openW3SchoolJavaPage() {
         driver.get(W_SCHOOL_URL);
     }
 
     public void closeConsents() {
-        driver.findElement(By.xpath(wSchoolAcceptConsentsButton)).click();
+        driver.findElement(By.xpath(W3SCHOOL_ACCEPT_CONCENT_BUTTON_XPATH)).click();
     }
 
     public void copyHeaderWord() {
-        WebElement copyTutorial = driver.findElement(By.xpath(copiedWordTutorial));
+        WebElement copyTutorial = driver.findElement(By.xpath(WORD_TO_COPY_XPATH));
         Actions make = new Actions(driver);
 
         make

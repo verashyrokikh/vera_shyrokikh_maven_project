@@ -8,34 +8,34 @@ import org.openqa.selenium.support.ui.Select;
 
 public class DemoqaSelectPage {
     WebDriver driver = Driver.getWebDriver();
-    private static String demoqaUrl = "https://demoqa.com/select-menu";
-    private static String oldStyleSelectMenuId = "oldSelectMenu";
-    private static String oldStyleSelectMenuOption = "//select[@id='oldSelectMenu']/option[3]";
-    private static String standardMultiSelectId = "cars";
-    private static String standardMultiSelectOption = "//select[@id='cars']/option[4]";
+    private static final String  DEMOQA_URL = "https://demoqa.com/select-menu";
+    private static final String OLD_STYLE_SELECT_MENU_ID = "oldSelectMenu";
+    private static String OLD_STYLE_SELECT_MENU_OPTION_XPATH = "//select[@id='oldSelectMenu']/option[3]";
+    private static String STANDARD_MULTI_SELECT_ID = "cars";
+    private static String STANDARD_MULTI_SELECT_OPTION_XPATH = "//select[@id='cars']/option[4]";
 
 
     public void openSelectMenuPage() {
-        driver.get(demoqaUrl);
+        driver.get(DEMOQA_URL);
     }
 
     public void checkOldStyleSelectMenu() {
-        WebElement selectStyle = driver.findElement(By.id(oldStyleSelectMenuId));
+        WebElement selectStyle = driver.findElement(By.id(OLD_STYLE_SELECT_MENU_ID));
         Select selectStyleOption = new Select(selectStyle);
-        selectStyleOption.selectByValue(String.valueOf(oldStyleSelectMenuOption));
+        selectStyleOption.selectByValue(String.valueOf(OLD_STYLE_SELECT_MENU_OPTION_XPATH));
     }
 
     public boolean selectedOldStyleOptionIsPresent() {
-        return driver.findElement(By.xpath(oldStyleSelectMenuOption)).isDisplayed();
+        return driver.findElement(By.xpath(OLD_STYLE_SELECT_MENU_OPTION_XPATH)).isDisplayed();
     }
 
     public void checkStandardMultiSelectOption() {
-        WebElement selectCar = driver.findElement(By.id(standardMultiSelectId));
+        WebElement selectCar = driver.findElement(By.id(STANDARD_MULTI_SELECT_ID));
         Select selectCarOption = new Select(selectCar);
-        selectCarOption.selectByValue(standardMultiSelectOption);
+        selectCarOption.selectByValue(STANDARD_MULTI_SELECT_OPTION_XPATH);
     }
 
     public boolean selectedMultiSelectOptionIsPresent() {
-        return driver.findElement(By.xpath(standardMultiSelectOption)).isDisplayed();
+        return driver.findElement(By.xpath(STANDARD_MULTI_SELECT_OPTION_XPATH)).isDisplayed();
     }
 }
