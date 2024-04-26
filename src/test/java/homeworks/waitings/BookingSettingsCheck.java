@@ -14,7 +14,7 @@ import java.time.Duration;
 public class BookingSettingsCheck {
 
     private static final String BOOKING_URL = "https://booking.com";
-    private static  String bookingAcceptConsentsButton = "//button[@id='onetrust-accept-btn-handler']";
+    private static String bookingAcceptConsentsButton = "//button[@id='onetrust-accept-btn-handler']";
     private static String geniusPopUp = "//div[@role='dialog']";
     private static String currencyPickerIcon = "//button[@data-testid='header-currency-picker-trigger']";
     private static String currencyTooltip = "//div[text()='Select your currency']";
@@ -47,11 +47,10 @@ public class BookingSettingsCheck {
         currencyActions.perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
-        WebElement currencyTooltip =driver.findElement(By.xpath("//div[text()='Select your currency']"));
+        WebElement currencyTooltip = driver.findElement(By.xpath("//div[text()='Select your currency']"));
 
         Assert.assertEquals("Tooltip 'currency' is not correct", "Select your currency", currencyTooltip.getText());
 
-        //Checking language tooltip
         WebElement language = driver.findElement(By.xpath("//button[@data-testid='header-language-picker-trigger']"));
 
         Actions languageActions = new Actions(driver);
@@ -65,7 +64,7 @@ public class BookingSettingsCheck {
         languageActions.perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
-        WebElement languageTooltip =driver.findElement(By.xpath("//div[text()='Select your language']"));
+        WebElement languageTooltip = driver.findElement(By.xpath("//div[text()='Select your language']"));
 
         Assert.assertEquals("Tooltip 'language' is not correct", "Select your language", languageTooltip.getText());
 

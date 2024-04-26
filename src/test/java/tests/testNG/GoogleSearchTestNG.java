@@ -22,7 +22,7 @@ public class GoogleSearchTestNG {
         w3SchoolJavaPage.copyHeaderWord();
         googleHome.openGooglePage();
         googleHome.closePopUp();
-        googleHome.pastWordAndExecuteSearch();
+        googleHome.pasteWordAndExecuteSearch();
         googleHome.checkSearchResults();
 
     }

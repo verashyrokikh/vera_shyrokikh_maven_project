@@ -37,15 +37,14 @@ public class BookingLondon {
         citySubmit.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
-        //driver.findElement(By.xpath("//div[@data-testid='autocomplete-results']/div/ul/li[1]")).click();
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
         WebElement tenthHotel = driver.findElement(By.xpath("//h2[contains(.,'Browse the results')]/following-sibling::div[22]"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true)", tenthHotel);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].style.backgroundColor = 'green'", tenthHotel);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].style.color = 'red'", tenthHotel);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", tenthHotel);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = 'green'", tenthHotel);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", tenthHotel);
 
-        byte[] asBytes = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        byte[] asBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         try {
             Files.write(Path.of("test.png"), asBytes);
         } catch (IOException e) {

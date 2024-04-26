@@ -23,7 +23,7 @@ public class GoogleHome {
         driver.findElement(By.xpath("//button[@id='L2AGLb']")).click();
     }
 
-    public void pastWordAndExecuteSearch() {
+    public void pasteWordAndExecuteSearch() {
         WebElement searchField = driver.findElement(By.xpath(TEXT_AREA_FIELD_XPATH));
 
         Actions past = new Actions(driver);
