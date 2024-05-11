@@ -1,5 +1,6 @@
 package tests.JUnit;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pages.GoogleHome;
@@ -22,6 +23,7 @@ public class GoogleSearchJUnit {
         googleHome.openGooglePage();
         googleHome.closePopUp();
         googleHome.pasteWordAndExecuteSearch();
-        googleHome.checkSearchResults();
+        googleHome.checkSearchResults("Tutorial");
+        Assert.assertTrue("Not all results have searched word", googleHome.checkSearchResults("Tutorial"));
     }
 }

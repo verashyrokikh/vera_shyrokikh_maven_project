@@ -21,12 +21,6 @@ public class Driver {
     protected static Config config = Optional.ofNullable(System.getProperty("CONFIG")).isEmpty() ?
             Config.CHROME : Config.valueOf(System.getProperty("CONFIG"));
 
-    public static WebDriver getDriver() {
-        if (null == driver) {
-            driver = getWebDriver();
-        }
-        return driver;
-    }
     public static WebDriver getWebDriver() {
 
         return switch (config) {
@@ -45,14 +39,17 @@ public class Driver {
     }
 
     private static WebDriver getChromeDriver() {
-        ChromeOptions caps = new ChromeOptions();
-        caps.addArguments("start-maximized");
-        caps.addArguments("disable-infobars");
-        caps.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-        return new ChromeDriver(caps);
+        if (null == driver) {
+            ChromeOptions caps = new ChromeOptions();
+            caps.addArguments("start-maximized");
+            caps.addArguments("disable-infobars");
+            caps.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+            driver = new ChromeDriver(caps);
+        }
+        return driver;
     }
 
-    public static void makeScreenShot(){
+    public static void makeScreenShot() {
         byte[] asBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         try {
             Files.write(Path.of("test.png"), asBytes);
@@ -61,9 +58,15 @@ public class Driver {
         }
     }
 
-    public static void goToLastTab(){
+    public static void goToLastTab() {
         ArrayList<String> openTabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(openTabs.getLast());
     }
 
+    public static void killDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
 }

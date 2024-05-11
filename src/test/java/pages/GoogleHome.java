@@ -36,9 +36,9 @@ public class GoogleHome {
                 .build().perform();
     }
 
-    public void checkSearchResults() {
+    public boolean checkSearchResults(String searchedWord) {
         List<WebElement> searchResults = driver.findElements(By.xpath(SEARCH_LIST_HEADER_XPATH));
-        String searchName = "Tutorial";
+        String searchName = searchedWord;
 
         for (WebElement resultField : searchResults) {
             if (resultField.getText().contains(searchName)) {
@@ -47,5 +47,6 @@ public class GoogleHome {
                 System.out.println("Search result doesn't have the word or it is written differently");
             }
         }
+        return false;
     }
 }

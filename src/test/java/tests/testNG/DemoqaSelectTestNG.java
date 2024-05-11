@@ -1,8 +1,10 @@
 package tests.testNG;
 
+import driver.Driver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.annotations.AfterClass;
 import pages.DemoqaSelectPage;
 
 public class DemoqaSelectTestNG {
@@ -26,4 +28,8 @@ public class DemoqaSelectTestNG {
         Assert.assertEquals(demoqaSelectPage.selectedMultiSelectOptionIsPresent(), "Audi", "Selected option is not correct!");
     }
 
+    @AfterClass
+    public void closeBrowser() {
+        Driver.killDriver();
+    }
 }

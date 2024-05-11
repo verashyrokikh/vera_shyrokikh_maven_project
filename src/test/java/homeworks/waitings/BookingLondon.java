@@ -38,6 +38,11 @@ public class BookingLondon {
 
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+        WebElement noticeBanner = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(By.xpath("//section/div/div/div/button")));
+        noticeBanner.click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
         WebElement tenthHotel = driver.findElement(By.xpath("//h2[contains(.,'Browse the results')]/following-sibling::div[22]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", tenthHotel);
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = 'green'", tenthHotel);

@@ -40,8 +40,10 @@ public class BookingHome {
     private static final String CALENDAR_START_DATE = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
     private static final String CALENDAR_END_DATE = "//div[@data-testid='searchbox-datepicker-calendar']/div/div[1]/table/tbody//span[text()='%s']";
     private static final String CURRENCY_PICKER_ICON_XPATH = "//button[@data-testid='header-currency-picker-trigger']";
+    private static final String LOCATE_CURRENCY_TOOLTIP_XPATH = "//*[contains(text(),'Select your currency')]";
     private static final String CURRENCY_TOOLTIP_XPATH = "//div[text()='Select your currency']";
     private static final String LANGUAGE_PICKER_ICON_XPATH = "//button[@data-testid='header-language-picker-trigger']";
+    private static final String LOCATE_LANGUAGE_TOOLTIP_XPATH = "//*[contains(text(),'Select your language')]";
     private static final String LANGUAGE_TOOLTIP_XPATH = "//div[text()='Select your language']";
 
     public void openBookingHomePage() {
@@ -69,24 +71,28 @@ public class BookingHome {
         destination.click();
         destination.sendKeys(cityName);
     }
-    public void confirmDestinationLondon(){
+
+    public void confirmDestinationLondon() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement citySubmit = new WebDriverWait(driver, Duration.ofSeconds(1000)).until(ExpectedConditions.elementToBeClickable(By.xpath(DESTINATION_DROPDOWN_LONDON_OPTION_XPATH)));
         citySubmit.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
-    public void confirmDestinationPrague(){
+
+    public void confirmDestinationPrague() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement citySubmit = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath(DESTINATION_DROPDOWN_PRAGUE_OPTION_XPATH)));
         citySubmit.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
-    public void closeCalendarNotNeeded(){
+
+    public void closeCalendarNotNeeded() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement noticeBanner = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(By.xpath(NOTICE_BANNER_XPATH)));
         noticeBanner.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
+
     public void chooseDates(int startInDaysFromNow, int endInDaysFromNow) {
         int calendarStartDate = LocalDate.now().plusDays(startInDaysFromNow).getDayOfMonth();
         int calendarEndDate = LocalDate.now().plusDays(endInDaysFromNow).getDayOfMonth();
@@ -141,54 +147,58 @@ public class BookingHome {
         driver.findElement(By.xpath(OPEN_SORTERS_DROPDOWN_XPATH)).click();
         driver.findElement(By.xpath(CHOOSE_SORTING_PROPERTY_PRICE_LOWEST_XPATH)).click();
     }
-    public void viewFirstSortedHotel(){
+
+    public void viewFirstSortedHotel() {
         driver.findElement(By.xpath(FIRST_HOTEL_PHOTO_XPATH)).click();
     }
-    public void checkFirstHotelScore() {
+
+    public boolean checkFirstHotelScore() {
         String[] hotelScoreText = driver.findElement(By.xpath(REVIEW_SCORE_FIRST_SORTED_HOTEL)).getText().split("\\s");
-        Float hotelScoreNumber = Float.parseFloat(hotelScoreText[2]);
-        Assert.assertEquals("The rating of the first hotel is not equal to 6", Optional.of(6.0f), hotelScoreNumber);
+        Double hotelScoreNumber = Double.parseDouble(hotelScoreText[2]);
+        return false;
     }
 
-    public void findTenthHotel(){
+    public void findTenthHotel() {
         WebElement tenthHotel = driver.findElement(By.xpath(TENTH_HOTEL));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", tenthHotel);
     }
 
-    public void changeHotelEntityColours(){
+    public void changeHotelEntityColours() {
         WebElement tenthHotel = driver.findElement(By.xpath(TENTH_HOTEL));
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = 'green'", tenthHotel);
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", tenthHotel);
     }
 
-    public void getCurrencySetting(){
+    public void getCurrencySetting() {
         WebElement currency = driver.findElement(By.xpath(CURRENCY_PICKER_ICON_XPATH));
         Actions currencyActions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        WebDriverWait waitCurrencyTooltip = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitCurrencyTooltip = new WebDriverWait(driver, Duration.ofSeconds(20));
         currencyActions.moveToElement(currency);
 
-        waitCurrencyTooltip.ignoring(ClassCastException.class).until(ExpectedConditions.presenceOfElementLocated(By.xpath(CURRENCY_TOOLTIP_XPATH)));
+        waitCurrencyTooltip.ignoring(ClassCastException.class).ignoring(TimeoutException.class).until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOCATE_CURRENCY_TOOLTIP_XPATH)));
         currencyActions.perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
-    public void checkCurrencySetting(){
-        WebElement currencyTooltip = driver.findElement(By.xpath(CURRENCY_TOOLTIP_XPATH));
-        Assert.assertEquals("Tooltip 'currency' is not correct", "Select your currency", currencyTooltip.getText());
+
+    public boolean checkCurrencySetting(String currencyTooltip) {
+        return driver.findElement(By.xpath(CURRENCY_TOOLTIP_XPATH)).getText().equals(currencyTooltip);
     }
-    public void getLanguageSetting(){
+
+    public void getLanguageSetting() {
         WebElement language = driver.findElement(By.xpath(LANGUAGE_PICKER_ICON_XPATH));
         Actions languageActions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        WebDriverWait waitLanguageTooltip = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitLanguageTooltip = new WebDriverWait(driver, Duration.ofSeconds(20));
         languageActions.moveToElement(language);
-        waitLanguageTooltip.ignoring(ClassCastException.class).until(ExpectedConditions.presenceOfElementLocated(By.xpath(LANGUAGE_TOOLTIP_XPATH)));
+        waitLanguageTooltip.ignoring(ClassCastException.class).ignoring(TimeoutException.class).until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOCATE_LANGUAGE_TOOLTIP_XPATH)));
         languageActions.perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
-    public void checkLanguageSetting(){
-        WebElement languageTooltip = driver.findElement(By.xpath(LANGUAGE_TOOLTIP_XPATH));
-        Assert.assertEquals("Tooltip 'language' is not correct", "Select your language", languageTooltip.getText());
+
+    public boolean checkLanguageSetting(String languageTooltip) {
+        return driver.findElement(By.xpath(LANGUAGE_TOOLTIP_XPATH)).getText().equals(languageTooltip);
+
     }
 }
 

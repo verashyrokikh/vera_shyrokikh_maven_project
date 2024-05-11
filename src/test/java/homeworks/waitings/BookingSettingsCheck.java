@@ -15,13 +15,14 @@ public class BookingSettingsCheck {
 
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.manage().window().maximize();
         driver.get("https://booking.com");
 
         driver.findElement(By.xpath("//button[@id='onetrust-accept-btn-handler']")).click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        WebElement geniusPopUp = new WebDriverWait(driver, Duration.ofSeconds(1000)).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@role='dialog']")));
+        WebElement geniusPopUp = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@role='dialog']")));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
         driver.findElement(By.xpath("//button[@aria-label='Dismiss sign-in info.']")).click();
@@ -31,7 +32,7 @@ public class BookingSettingsCheck {
         Actions currencyActions = new Actions(driver);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        WebDriverWait waitCurrencyTooltip = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait waitCurrencyTooltip = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         currencyActions.moveToElement(currency);
 

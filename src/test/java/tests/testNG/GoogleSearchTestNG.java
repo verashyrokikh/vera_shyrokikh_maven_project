@@ -1,8 +1,10 @@
 package tests.testNG;
 
+import driver.Driver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.annotations.AfterClass;
 import pages.GoogleHome;
 import pages.W3SchoolJavaPage;
 
@@ -23,9 +25,13 @@ public class GoogleSearchTestNG {
         googleHome.openGooglePage();
         googleHome.closePopUp();
         googleHome.pasteWordAndExecuteSearch();
-        googleHome.checkSearchResults();
+        googleHome.checkSearchResults("Tutorial");
+        Assert.assertTrue(googleHome.checkSearchResults("Tutorial"), "Not all results have searched word");
 
     }
-
+    @AfterClass
+    public void closeBrowser() {
+        Driver.killDriver();
+    }
 
 }
