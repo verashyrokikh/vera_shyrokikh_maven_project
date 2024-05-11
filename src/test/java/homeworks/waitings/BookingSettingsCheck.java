@@ -13,14 +13,6 @@ import java.time.Duration;
 
 public class BookingSettingsCheck {
 
-    private static final String BOOKING_URL = "https://booking.com";
-    private static String bookingAcceptConsentsButton = "//button[@id='onetrust-accept-btn-handler']";
-    private static String geniusPopUp = "//div[@role='dialog']";
-    private static String currencyPickerIcon = "//button[@data-testid='header-currency-picker-trigger']";
-    private static String currencyTooltip = "//div[text()='Select your currency']";
-    private static String languagePickerIcon = "//button[@data-testid='header-language-picker-trigger']";
-    private static String languageTooltip = "//div[text()='Select your language']";
-
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

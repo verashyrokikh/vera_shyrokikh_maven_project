@@ -12,7 +12,6 @@ import java.time.Duration;
 
 public class BookingLondon {
 
-
     public static void main(String[] args) {
 
 
