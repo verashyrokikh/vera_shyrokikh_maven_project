@@ -1,11 +1,14 @@
 package pages;
 
 import driver.Driver;
-import org.junit.Assert;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -13,6 +16,7 @@ import java.util.Optional;
 
 public class BookingHome {
     WebDriver driver = Driver.getWebDriver();
+    private static final Logger LOGGER = LogManager.getLogger(BookingHotelPage.class);
 
     private static final String BOOKING_URL = "https://booking.com";
     private static final String BOOKING_ACCEPT_CONSENTS_BUTTON_XPATH = "//button[@id='onetrust-accept-btn-handler']";
@@ -50,26 +54,31 @@ public class BookingHome {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.get(BOOKING_URL);
+        LOGGER.info("Booking home page is opened");
     }
 
     public void acceptConsents() {
         driver.findElement(By.xpath(BOOKING_ACCEPT_CONSENTS_BUTTON_XPATH)).click();
+        LOGGER.info("Consents are accepted");
     }
 
     public void closeGeniusPopUp() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         WebElement geniusPopUp = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath(CLOSE_GENIUS_POP_UP_XPATH)));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Genius pop-up is closed");
     }
 
     public void dismissSignInPopUp() {
         driver.findElement(By.xpath(DISMISS_SIGN_IN_POP_UP_BUTTON_XPATH)).click();
+        LOGGER.info("Sign-in pop-up is closed");
     }
 
     public void chooseDestination(String cityName) {
         WebElement destination = driver.findElement(By.xpath(DESTINATION_INPUT_FIELD_XPATH));
         destination.click();
         destination.sendKeys(cityName);
+        LOGGER.info("Destination place name is typed into the field");
     }
 
     public void confirmDestinationLondon() {
@@ -77,6 +86,7 @@ public class BookingHome {
         WebElement citySubmit = new WebDriverWait(driver, Duration.ofSeconds(1000)).until(ExpectedConditions.elementToBeClickable(By.xpath(DESTINATION_DROPDOWN_LONDON_OPTION_XPATH)));
         citySubmit.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Destination London search is confirmed");
     }
 
     public void confirmDestinationPrague() {
@@ -84,6 +94,7 @@ public class BookingHome {
         WebElement citySubmit = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.xpath(DESTINATION_DROPDOWN_PRAGUE_OPTION_XPATH)));
         citySubmit.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Destination Prague search is confirmed");
     }
 
     public void closeCalendarNotNeeded() {
@@ -91,6 +102,7 @@ public class BookingHome {
         WebElement noticeBanner = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(By.xpath(NOTICE_BANNER_XPATH)));
         noticeBanner.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Calendar window is closed");
     }
 
     public void chooseDates(int startInDaysFromNow, int endInDaysFromNow) {
@@ -99,30 +111,36 @@ public class BookingHome {
         driver.findElement(By.xpath(CALENDAR_CHECK_IN_XPATH)).click();
         driver.findElement(By.xpath(String.format(CALENDAR_START_DATE, calendarStartDate))).click();
         driver.findElement(By.xpath(String.format(CALENDAR_END_DATE, calendarEndDate))).click();
+        LOGGER.info("Dates are chosen");
     }
 
     public void openOccupancyConfig() {
         driver.findElement(By.xpath(OCCUPATION_CONFIG_XPATH)).click();
+        LOGGER.info("Occupancy config is opened");
     }
 
     public void addNumberOfAdults(int numberOfAdultsToAdd) {
         for (int i = 0; i < numberOfAdultsToAdd; i++) {
             driver.findElement(By.xpath(ADD_ADULTS_XPATH)).click();
         }
+        LOGGER.info("Adults are added");
     }
 
     public void addNumberOfRooms(int numberOfRoomsToAdd) {
         for (int j = 0; j < numberOfRoomsToAdd; j++) {
             driver.findElement(By.xpath(ADD_ROOMS_XPATH)).click();
         }
+        LOGGER.info("Rooms are added");
     }
 
     public void submitOccupancy() {
         driver.findElement(By.xpath(SUBMIT_OCCUPANCY_CHOICE_XPATH)).click();
+        LOGGER.info("Occupancy settings submitted");
     }
 
     public void searchHotels() {
         driver.findElement(By.xpath(SUBMIT_SEARCH_BUTTON_XPATH)).click();
+        LOGGER.info("Search started");
     }
 
     public void filterByReviewScoreOver6() {
@@ -136,20 +154,24 @@ public class BookingHome {
         checkbox.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LABEL_SCORE_RATING_CHOSEN_XPATH)));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Results filtered by review score 6+");
     }
 
     public void sortByPropertyRatingHighToLow() {
         driver.findElement(By.xpath(OPEN_SORTERS_DROPDOWN_XPATH)).click();
         driver.findElement(By.xpath(CHOOSE_SORTING_PROPERTY_RATING_LOW_TO_HIGH_XPATH)).click();
+        LOGGER.info("Results sorted by property rating from high to low");
     }
 
     public void sortByPropertyPriceLowest() {
         driver.findElement(By.xpath(OPEN_SORTERS_DROPDOWN_XPATH)).click();
         driver.findElement(By.xpath(CHOOSE_SORTING_PROPERTY_PRICE_LOWEST_XPATH)).click();
+        LOGGER.info("Results sorted by property price lowest");
     }
 
     public void viewFirstSortedHotel() {
         driver.findElement(By.xpath(FIRST_HOTEL_PHOTO_XPATH)).click();
+        LOGGER.info("First sorted hotel is found");
     }
 
     public boolean checkFirstHotelScore() {
@@ -161,12 +183,14 @@ public class BookingHome {
     public void findTenthHotel() {
         WebElement tenthHotel = driver.findElement(By.xpath(TENTH_HOTEL));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", tenthHotel);
+        LOGGER.info("Tenth hotel is found");
     }
 
     public void changeHotelEntityColours() {
         WebElement tenthHotel = driver.findElement(By.xpath(TENTH_HOTEL));
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = 'green'", tenthHotel);
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", tenthHotel);
+        LOGGER.info("Hotel element colors are changed");
     }
 
     public void getCurrencySetting() {
@@ -179,6 +203,7 @@ public class BookingHome {
         waitCurrencyTooltip.ignoring(ClassCastException.class).ignoring(TimeoutException.class).until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOCATE_CURRENCY_TOOLTIP_XPATH)));
         currencyActions.perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Currency tooltip is seen");
     }
 
     public boolean checkCurrencySetting(String currencyTooltip) {
@@ -194,6 +219,7 @@ public class BookingHome {
         waitLanguageTooltip.ignoring(ClassCastException.class).ignoring(TimeoutException.class).until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOCATE_LANGUAGE_TOOLTIP_XPATH)));
         languageActions.perform();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        LOGGER.info("Language tooltip is seen");
     }
 
     public boolean checkLanguageSetting(String languageTooltip) {
